@@ -20,12 +20,14 @@ class _HomePageState extends State<HomePage> {
           children: [
             Expanded(
               child: MyCard(
+                  BgColor: Colors.green,
                   data: '5',
                   textcolor: Colors.black,
                   belowdata: 'Todays Cases'),
             ),
             Expanded(
               child: MyCard(
+                  BgColor: Colors.red,
                   data: '500',
                   textcolor: Colors.black,
                   belowdata: 'Total Cases'),

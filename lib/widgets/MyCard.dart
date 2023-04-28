@@ -4,11 +4,13 @@ class MyCard extends StatelessWidget {
   final String data;
   final Color textcolor;
   final String belowdata;
+  final Color BgColor;
   const MyCard(
       {super.key,
       required this.data,
       required this.textcolor,
-      required this.belowdata});
+      required this.belowdata,
+      required this.BgColor});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,7 @@ class MyCard extends StatelessWidget {
         width: 180,
         // color: Colors.amber,
         decoration: BoxDecoration(
-          color: Colors.pink,
+          color: BgColor,
           borderRadius: BorderRadius.all(
             Radius.circular(
               10,
