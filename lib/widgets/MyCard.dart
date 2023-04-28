@@ -17,7 +17,14 @@ class MyCard extends StatelessWidget {
       child: Container(
         height: 180,
         width: 180,
-        color: Colors.amber,
+        // color: Colors.amber,
+        decoration: BoxDecoration(
+            color: Colors.pink,
+            borderRadius: BorderRadius.all(
+              Radius.circular(
+                10,
+              ),
+            )),
       ),
     );
   }
