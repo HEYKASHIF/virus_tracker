@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:virus_tracker/widgets/AppBar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -10,8 +11,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.pink,
+    return Scaffold(
+      appBar: appBar(),
     );
   }
 }
