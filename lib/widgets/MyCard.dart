@@ -19,12 +19,39 @@ class MyCard extends StatelessWidget {
         width: 180,
         // color: Colors.amber,
         decoration: BoxDecoration(
-            color: Colors.pink,
-            borderRadius: BorderRadius.all(
-              Radius.circular(
-                10,
+          color: Colors.pink,
+          borderRadius: BorderRadius.all(
+            Radius.circular(
+              10,
+            ),
+          ),
+        ),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                data,
+                style: TextStyle(
+                  color: textcolor,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 25,
+                ),
               ),
-            )),
+              SizedBox(
+                height: 8,
+              ),
+              Text(
+                belowdata,
+                style: TextStyle(
+                  color: Colors.grey,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 15,
+                ),
+              )
+            ],
+          ),
+        ),
       ),
     );
   }
