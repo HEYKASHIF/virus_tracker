@@ -60,10 +60,21 @@ class _HomePageState extends State<HomePage> {
             flag.length > 0
                 ? Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: CircleAvatar(
-                      backgroundImage: NetworkImage(flag),
-                      radius: 45,
-                      backgroundColor: Colors.transparent,
+                    child: Column(
+                      children: [
+                        CircleAvatar(
+                          backgroundImage: NetworkImage(flag),
+                          radius: 45,
+                          backgroundColor: Colors.transparent,
+                        ),
+                        Text(
+                          current,
+                          style: TextStyle(
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
+                        )
+                      ],
                     ),
                   )
                 : SizedBox(
@@ -156,6 +167,18 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 100),
+                child: Text(
+                  'Made By Kashif',
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.white),
+                ),
+              ),
+            )
           ],
         ),
       ),
