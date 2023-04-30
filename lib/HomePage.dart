@@ -51,23 +51,37 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.pink,
       appBar: appBar(),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Column(
           children: [
             flag.length > 0
-                ? CircleAvatar(
-                    backgroundImage: NetworkImage(flag),
-                    radius: 45,
-                    backgroundColor: Colors.transparent,
+                ? Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: CircleAvatar(
+                      backgroundImage: NetworkImage(flag),
+                      radius: 45,
+                      backgroundColor: Colors.transparent,
+                    ),
                   )
                 : SizedBox(
                     width: 10,
                   ),
             _countries.isNotEmpty
                 ? DropdownButton(
-                    hint: Text('Choose country'),
+                    hint: Text(
+                      'Choose country',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    icon: Icon(
+                      Icons.keyboard_arrow_down_outlined,
+                      color: Colors.black,
+                    ),
                     items: _countries.map((value) {
                       return DropdownMenuItem(
                         value: value['country'],
@@ -103,15 +117,15 @@ class _HomePageState extends State<HomePage> {
                     child: MyCard(
                         BgColor: Colors.green,
                         data: TodayCase == null ? "-" : TodayCase.toString(),
-                        textcolor: Colors.black,
+                        textcolor: Colors.white,
                         belowdata: 'Todays Cases'),
                   ),
                   Expanded(
                     child: MyCard(
-                        BgColor: Colors.red,
+                        BgColor: Colors.amber,
                         data:
                             TodayDeaths == null ? "-" : TodayDeaths.toString(),
-                        textcolor: Colors.black,
+                        textcolor: Colors.white,
                         belowdata: 'Todays Deaths'),
                   ),
                 ],
@@ -126,9 +140,9 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   Expanded(
                     child: MyCard(
-                        BgColor: Colors.green,
+                        BgColor: Colors.black,
                         data: TotalCase == null ? "-" : TotalCase.toString(),
-                        textcolor: Colors.black,
+                        textcolor: Colors.white,
                         belowdata: 'Total Cases'),
                   ),
                   Expanded(
@@ -136,7 +150,7 @@ class _HomePageState extends State<HomePage> {
                         BgColor: Colors.red,
                         data:
                             TotalDeaths == null ? "-" : TotalDeaths.toString(),
-                        textcolor: Colors.black,
+                        textcolor: Colors.white,
                         belowdata: 'Total Deaths'),
                   ),
                 ],

@@ -46,7 +46,7 @@ class MyCard extends StatelessWidget {
               Text(
                 belowdata,
                 style: TextStyle(
-                  color: Colors.black,
+                  color: Colors.white,
                   fontWeight: FontWeight.w500,
                   fontSize: 15,
                 ),
