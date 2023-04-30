@@ -18,6 +18,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   String current = "No Country selected";
+  String flag = "";
   // ignore: non_constant_identifier_names
   void FetchData() async {
     http.Response response = await http.get(Uri.parse(Api));
@@ -37,6 +38,7 @@ class _HomePageState extends State<HomePage> {
       TotalDeaths = Data['deaths'];
       TodayDeaths = Data['todayDeaths'];
       Population = Data['population'];
+      flag = Data['countryInfo']['flag'];
     });
   }
 
@@ -50,60 +52,98 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBar(),
-      body: Column(
-        children: [
-          _countries.isNotEmpty
-              ? DropdownButton(
-                  hint: Text('Choose country'),
-                  items: _countries.map((value) {
-                    return DropdownMenuItem(
-                      value: value['country'],
-                      child: Row(
-                        children: [
-                          CircleAvatar(
-                            backgroundImage:
-                                NetworkImage(value['countryInfo']['flag']),
-                            radius: 30,
-                            backgroundColor: Colors.transparent,
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          Text(value['country']),
-                        ],
-                      ),
-                    );
-                  }).toList(),
-                  onChanged: (value) {
-                    setState(() {
-                      current = value.toString();
-                      GetData(current);
-                    });
-                  },
-                )
-              : const CircularProgressIndicator(),
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Row(
-              children: [
-                Expanded(
-                  child: MyCard(
-                      BgColor: Colors.green,
-                      data: TodayCase == null ? "-" : TodayCase.toString(),
-                      textcolor: Colors.black,
-                      belowdata: 'Todays Cases'),
-                ),
-                Expanded(
-                  child: MyCard(
-                      BgColor: Colors.red,
-                      data: TodayDeaths == null ? "-" : TodayDeaths.toString(),
-                      textcolor: Colors.black,
-                      belowdata: 'Todays Deaths'),
-                ),
-              ],
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Column(
+          children: [
+            flag.length > 0
+                ? CircleAvatar(
+                    backgroundImage: NetworkImage(flag),
+                    radius: 45,
+                    backgroundColor: Colors.transparent,
+                  )
+                : SizedBox(
+                    width: 10,
+                  ),
+            _countries.isNotEmpty
+                ? DropdownButton(
+                    hint: Text('Choose country'),
+                    items: _countries.map((value) {
+                      return DropdownMenuItem(
+                        value: value['country'],
+                        child: Row(
+                          children: [
+                            CircleAvatar(
+                              backgroundImage:
+                                  NetworkImage(value['countryInfo']['flag']),
+                              radius: 30,
+                              backgroundColor: Colors.transparent,
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Text(value['country']),
+                          ],
+                        ),
+                      );
+                    }).toList(),
+                    onChanged: (value) {
+                      setState(() {
+                        current = value.toString();
+                        GetData(current);
+                      });
+                    },
+                  )
+                : const CircularProgressIndicator(),
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: MyCard(
+                        BgColor: Colors.green,
+                        data: TodayCase == null ? "-" : TodayCase.toString(),
+                        textcolor: Colors.black,
+                        belowdata: 'Todays Cases'),
+                  ),
+                  Expanded(
+                    child: MyCard(
+                        BgColor: Colors.red,
+                        data:
+                            TodayDeaths == null ? "-" : TodayDeaths.toString(),
+                        textcolor: Colors.black,
+                        belowdata: 'Todays Deaths'),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+            SizedBox(
+              height: 15,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: MyCard(
+                        BgColor: Colors.green,
+                        data: TotalCase == null ? "-" : TotalCase.toString(),
+                        textcolor: Colors.black,
+                        belowdata: 'Total Cases'),
+                  ),
+                  Expanded(
+                    child: MyCard(
+                        BgColor: Colors.red,
+                        data:
+                            TotalDeaths == null ? "-" : TotalDeaths.toString(),
+                        textcolor: Colors.black,
+                        belowdata: 'Total Deaths'),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
