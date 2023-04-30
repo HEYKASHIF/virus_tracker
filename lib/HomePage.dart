@@ -74,9 +74,9 @@ class _HomePageState extends State<HomePage> {
                     hint: Text(
                       'Choose country',
                       style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black),
                     ),
                     icon: Icon(
                       Icons.keyboard_arrow_down_outlined,
@@ -131,9 +131,9 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-            SizedBox(
-              height: 15,
-            ),
+            // SizedBox(
+            //   height: 15,
+            // ),
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: Row(
