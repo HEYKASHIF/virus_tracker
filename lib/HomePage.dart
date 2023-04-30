@@ -15,6 +15,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  // ignore: non_constant_identifier_names
   void FetchData() async {
     http.Response response = await http.get(Uri.parse(Api));
     final countries = json.decode(response.body);
@@ -33,26 +34,56 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBar(),
-      body: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Row(
-          children: [
-            Expanded(
-              child: MyCard(
-                  BgColor: Colors.green,
-                  data: '5',
-                  textcolor: Colors.black,
-                  belowdata: 'Todays Cases'),
+      body: Column(
+        children: [
+          _countries.isNotEmpty
+              ? DropdownButton(
+                  items: _countries.map((value) {
+                    return DropdownMenuItem(
+                      value: value['country'],
+                      child: Row(
+                        children: [
+                          CircleAvatar(
+                            backgroundImage:
+                                NetworkImage(value['countryInfo']['flag']),
+                            radius: 30,
+                            backgroundColor: Colors.transparent,
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Text(value['country']),
+                        ],
+                      ),
+                    );
+                  }).toList(),
+                  onChanged: (value) {
+                    print(value);
+                  },
+                )
+              : const CircularProgressIndicator(),
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Row(
+              children: [
+                Expanded(
+                  child: MyCard(
+                      BgColor: Colors.green,
+                      data: '5',
+                      textcolor: Colors.black,
+                      belowdata: 'Todays Cases'),
+                ),
+                Expanded(
+                  child: MyCard(
+                      BgColor: Colors.red,
+                      data: '500',
+                      textcolor: Colors.black,
+                      belowdata: 'Total Cases'),
+                ),
+              ],
             ),
-            Expanded(
-              child: MyCard(
-                  BgColor: Colors.red,
-                  data: '500',
-                  textcolor: Colors.black,
-                  belowdata: 'Total Cases'),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
