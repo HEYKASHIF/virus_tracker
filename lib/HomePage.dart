@@ -5,6 +5,8 @@ import 'package:virus_tracker/widgets/MyCard.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+var TotalCase, TodayCase, TotalDeaths, TodayDeaths, Population;
+
 List _countries = [];
 
 class HomePage extends StatefulWidget {
@@ -15,12 +17,26 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  String current = "No Country selected";
   // ignore: non_constant_identifier_names
   void FetchData() async {
     http.Response response = await http.get(Uri.parse(Api));
     final countries = json.decode(response.body);
     setState(() {
       _countries = countries;
+    });
+  }
+
+  void GetData(current) async {
+    http.Response response = await http.get(Uri.parse(Api + "/" + current));
+    final Data = json.decode(response.body);
+
+    setState(() {
+      TotalCase = Data['cases'];
+      TodayCase = Data['todayCases'];
+      TotalDeaths = Data['deaths'];
+      TodayDeaths = Data['todayDeaths'];
+      Population = Data['population'];
     });
   }
 
@@ -38,6 +54,7 @@ class _HomePageState extends State<HomePage> {
         children: [
           _countries.isNotEmpty
               ? DropdownButton(
+                  hint: Text('Choose country'),
                   items: _countries.map((value) {
                     return DropdownMenuItem(
                       value: value['country'],
@@ -58,7 +75,10 @@ class _HomePageState extends State<HomePage> {
                     );
                   }).toList(),
                   onChanged: (value) {
-                    print(value);
+                    setState(() {
+                      current = value.toString();
+                      GetData(current);
+                    });
                   },
                 )
               : const CircularProgressIndicator(),
@@ -69,16 +89,16 @@ class _HomePageState extends State<HomePage> {
                 Expanded(
                   child: MyCard(
                       BgColor: Colors.green,
-                      data: '5',
+                      data: TodayCase == null ? "-" : TodayCase.toString(),
                       textcolor: Colors.black,
                       belowdata: 'Todays Cases'),
                 ),
                 Expanded(
                   child: MyCard(
                       BgColor: Colors.red,
-                      data: '500',
+                      data: TodayDeaths == null ? "-" : TodayDeaths.toString(),
                       textcolor: Colors.black,
-                      belowdata: 'Total Cases'),
+                      belowdata: 'Todays Deaths'),
                 ),
               ],
             ),
