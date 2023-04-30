@@ -167,18 +167,62 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Expanded(
+                child: Container(
+                  height: 90,
+                  width: 360,
+                  // color: Colors.amber,
+                  decoration: BoxDecoration(
+                    color: Colors.blue,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(
+                        10,
+                      ),
+                    ),
+                  ),
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          Population.toString(),
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 25,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 8,
+                        ),
+                        Text(
+                          "Population",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 15,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
             Center(
               child: Padding(
-                padding: const EdgeInsets.only(top: 100),
+                padding: const EdgeInsets.fromLTRB(25, 100, 25, 10),
                 child: Text(
-                  'Made By Kashif',
+                  'Made With 💕 By Kashif',
                   style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w500,
-                      color: Colors.white),
+                      color: Colors.black),
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),
