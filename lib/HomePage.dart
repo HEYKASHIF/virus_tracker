@@ -82,6 +82,9 @@ class _HomePageState extends State<HomePage> {
                   ),
             _countries.isNotEmpty
                 ? DropdownButton(
+                    iconSize: 40,
+                    focusColor: Colors.pink,
+                    elevation: 50,
                     hint: Text(
                       'Choose country',
                       style: TextStyle(
