@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:virus_tracker/constant/API.dart';
 import 'package:virus_tracker/widgets/AppBar.dart';
 import 'package:virus_tracker/widgets/MyCard.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+List _countries = [];
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -10,6 +15,20 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  void FetchData() async {
+    http.Response response = await http.get(Uri.parse(Api));
+    final countries = json.decode(response.body);
+    setState(() {
+      _countries = countries;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    FetchData();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
